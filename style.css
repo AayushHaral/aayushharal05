@@ -1838,6 +1838,63 @@ section {
     color: #ef4444;
 }
 
+/* Google Form Contact CTA Card */
+.contact-cta-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.8rem;
+    padding: 3.5rem 2.2rem;
+    height: 100%;
+    min-height: 400px;
+}
+
+.contact-cta-icon-wrapper {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.06);
+    border: 1px solid rgba(59, 130, 246, 0.12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-blue);
+    transition: transform var(--transition-normal), border-color var(--transition-normal), color var(--transition-normal), background-color var(--transition-normal);
+}
+
+.contact-cta-card:hover .contact-cta-icon-wrapper {
+    transform: scale(1.1) rotate(6deg);
+    border-color: var(--accent-purple);
+    color: var(--accent-purple);
+    background: rgba(168, 85, 247, 0.08);
+}
+
+.contact-cta-content h3 {
+    font-family: var(--font-heading);
+    font-size: 1.65rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: var(--text-primary);
+}
+
+.contact-cta-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.98rem;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.contact-cta-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
 /* ==========================================
    FOOTER SECTION
    ========================================== */

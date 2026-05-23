@@ -832,45 +832,25 @@
                     </div>
 
                     <!-- Contact Form Column -->
-                    <div class="contact-form-card glass-card">
-                        <h3>Send a Message</h3>
-                        <form id="contact-form" class="contact-form" action="#" method="POST" novalidate>
-                            <div class="form-group">
-                                <label for="form-name">Name</label>
-                                <div class="input-wrapper">
-                                    <i data-lucide="user" class="input-icon"></i>
-                                    <input type="text" id="form-name" name="name" placeholder="Your Name" required>
-                                </div>
-                                <span class="error-msg" id="name-error">Please enter your name</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="form-email">Email</label>
-                                <div class="input-wrapper">
-                                    <i data-lucide="mail" class="input-icon"></i>
-                                    <input type="email" id="form-email" name="email"
-                                        placeholder="your.email@example.com" required>
-                                </div>
-                                <span class="error-msg" id="email-error">Please enter a valid email address</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="form-message">Message</label>
-                                <div class="input-wrapper text-area-wrapper">
-                                    <i data-lucide="message-square" class="input-icon text-area-icon"></i>
-                                    <textarea id="form-message" name="message" rows="5"
-                                        placeholder="How can I help you?" required></textarea>
-                                </div>
-                                <span class="error-msg" id="message-error">Please enter your message</span>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-submit">
-                                <span>Send Message</span>
-                                <i data-lucide="send"></i>
-                            </button>
-
-                            <div id="form-feedback" class="form-feedback"></div>
-                        </form>
+                    <div class="contact-cta-card glass-card">
+                        <div class="contact-cta-icon-wrapper">
+                            <i data-lucide="file-text" style="width: 32px; height: 32px;"></i>
+                        </div>
+                        <div class="contact-cta-content">
+                            <h3>Send a Message</h3>
+                            <p>
+                                Have a project in mind, a job opportunity, or just want to connect? Please fill out my quick contact form (includes name, email, mobile validation & message).
+                            </p>
+                        </div>
+                        <!-- Replace the href below with your copied Google Form URL from google_form_setup.md -->
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf7WiZ4MOBbvs5s03Rz0jcBsyBY4v3qU4b_tzBFPcyPezikZg/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; max-width: 280px; justify-content: center;">
+                            <span>Contact Me</span>
+                            <i data-lucide="external-link"></i>
+                        </a>
+                        <div class="contact-cta-footer">
+                            <span>Opens securely in a new tab</span>
+                            <span>Saves instantly to "Portfolio Contact Responses" Sheet</span>
+                        </div>
                     </div>
                 </div>
             </div>

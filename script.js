@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initCustomCursor();
     initScrollReveal();
     initProjectFilter();
-    initContactForm();
     initVisitorCounter();
 });
 
@@ -434,92 +433,7 @@ function initProjectFilter() {
     });
 }
 
-/* ==========================================
-   CONTACT FORM VALIDATION
-   ========================================== */
-function initContactForm() {
-    const form = document.getElementById("contact-form");
-    if (!form) return;
 
-    const nameInput = document.getElementById("form-name");
-    const emailInput = document.getElementById("form-email");
-    const messageInput = document.getElementById("form-message");
-    const feedbackDiv = document.getElementById("form-feedback");
-
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        
-        let isValid = true;
-
-        // Name Validation
-        if (!nameInput.value.trim()) {
-            nameInput.closest(".form-group").classList.add("error");
-            isValid = false;
-        } else {
-            nameInput.closest(".form-group").classList.remove("error");
-        }
-
-        // Email Validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailInput.value.trim() || !emailRegex.test(emailInput.value)) {
-            emailInput.closest(".form-group").classList.add("error");
-            isValid = false;
-        } else {
-            emailInput.closest(".form-group").classList.remove("error");
-        }
-
-        // Message Validation
-        if (!messageInput.value.trim()) {
-            messageInput.closest(".form-group").classList.add("error");
-            isValid = false;
-        } else {
-            messageInput.closest(".form-group").classList.remove("error");
-        }
-
-        if (isValid) {
-            // Show sending feedback
-            const submitBtn = form.querySelector(".btn-submit");
-            const originalBtnHtml = submitBtn.innerHTML;
-            
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<span>Sending...</span><i data-lucide="loader" class="animate-spin"></i>`;
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-
-            // Simulate form submission to backend (1.5s delay)
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnHtml;
-                if (typeof lucide !== 'undefined') lucide.createIcons();
-
-                // Clear fields
-                form.reset();
-
-                // Show success feedback
-                feedbackDiv.textContent = "Thank you, Aayush! Your message was sent successfully.";
-                feedbackDiv.className = "form-feedback success";
-
-                // Automatically hide feedback after 5 seconds
-                setTimeout(() => {
-                    feedbackDiv.style.display = "none";
-                }, 5000);
-                
-            }, 1500);
-        } else {
-            feedbackDiv.textContent = "Please resolve the highlights errors in red before sending.";
-            feedbackDiv.className = "form-feedback error";
-        }
-    });
-
-    // Clear error highlights on input
-    [nameInput, emailInput, messageInput].forEach(input => {
-        input.addEventListener("input", () => {
-            const group = input.closest(".form-group");
-            if (group.classList.contains("error")) {
-                group.classList.remove("error");
-            }
-        });
-    });
-}
 
 /* ==========================================
    VISITOR COUNTER SYSTEM
