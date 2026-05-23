@@ -92,7 +92,7 @@ def create_resume_pdf(filename):
     )
     
     # Header Section
-    story.append(Paragraph("AAYUSH ANIL HARAL", title_style))
+    story.append(Paragraph("AAYUSH HARAL", title_style))
     story.append(Paragraph("Computer Engineer & Web Developer", subtitle_style))
     
     # Contact grid (using Table for clean layout)
