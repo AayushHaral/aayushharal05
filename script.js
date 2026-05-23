@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initCustomCursor();
     initScrollReveal();
     initProjectFilter();
-    initVisitorCounter();
 });
 
 /* ==========================================
@@ -433,77 +432,3 @@ function initProjectFilter() {
     });
 }
 
-
-
-/* ==========================================
-   VISITOR COUNTER SYSTEM
-   ========================================== */
-function initVisitorCounter() {
-    const footerCounterSpan = document.getElementById("visitor-count");
-    if (!footerCounterSpan) return;
-
-    const namespace = "aayushharal-portfolio";
-    const counterKey = "hits";
-    
-    // Check if the user has already visited (one time only using localStorage)
-    const hasVisited = localStorage.getItem("portfolio_visited");
-    let url = `https://api.counterapi.dev/v1/${namespace}/${counterKey}/`; // Default read
-    
-    if (!hasVisited) {
-        // Increment the count
-        url = `https://api.counterapi.dev/v1/${namespace}/${counterKey}/up`;
-    }
-
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("CounterAPI network response was not ok");
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data && typeof data.count === "number") {
-                const count = data.count;
-                
-                // Save visit state in localStorage if it wasn't already set
-                if (!hasVisited) {
-                    localStorage.setItem("portfolio_visited", "true");
-                }
-                
-                // Animate count up
-                animateCountUp(footerCounterSpan, count);
-            } else {
-                footerCounterSpan.textContent = "---";
-            }
-        })
-        .catch(error => {
-            console.error("Error updating/fetching visitor counter:", error);
-            // Fallback gracefully
-            footerCounterSpan.textContent = "124";
-        });
-}
-
-function animateCountUp(element, targetValue) {
-    let startValue = 0;
-    const duration = 1500; // Animation duration in ms
-    const startTime = performance.now();
-
-    function updateCount(currentTime) {
-        const elapsedTime = currentTime - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        
-        // Easing function: easeOutExpo
-        const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-        
-        const currentValue = Math.floor(easeProgress * targetValue);
-        element.textContent = currentValue.toLocaleString();
-
-        if (progress < 1) {
-            requestAnimationFrame(updateCount);
-        } else {
-            element.textContent = targetValue.toLocaleString();
-        }
-    }
-
-    requestAnimationFrame(updateCount);
-}
