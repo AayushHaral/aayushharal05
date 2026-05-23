@@ -526,14 +526,13 @@ function initContactForm() {
    ========================================== */
 function initVisitorCounter() {
     const footerCounterSpan = document.getElementById("visitor-count");
-    const floatingCounterSpan = document.getElementById("floating-visitor-count");
-    if (!footerCounterSpan && !floatingCounterSpan) return;
+    if (!footerCounterSpan) return;
 
     const namespace = "aayushharal-portfolio";
     const counterKey = "hits";
     
-    // Check if the user has already visited in this session
-    const hasVisited = sessionStorage.getItem("portfolio_visited");
+    // Check if the user has already visited (one time only using localStorage)
+    const hasVisited = localStorage.getItem("portfolio_visited");
     let url = `https://api.counterapi.dev/v1/${namespace}/${counterKey}/`; // Default read
     
     if (!hasVisited) {
@@ -552,28 +551,21 @@ function initVisitorCounter() {
             if (data && typeof data.count === "number") {
                 const count = data.count;
                 
-                // Save visit state in sessionStorage if it wasn't already set
+                // Save visit state in localStorage if it wasn't already set
                 if (!hasVisited) {
-                    sessionStorage.setItem("portfolio_visited", "true");
+                    localStorage.setItem("portfolio_visited", "true");
                 }
                 
-                // Animate count up for both counters
-                if (footerCounterSpan) {
-                    animateCountUp(footerCounterSpan, count);
-                }
-                if (floatingCounterSpan) {
-                    animateCountUp(floatingCounterSpan, count);
-                }
+                // Animate count up
+                animateCountUp(footerCounterSpan, count);
             } else {
-                if (footerCounterSpan) footerCounterSpan.textContent = "---";
-                if (floatingCounterSpan) floatingCounterSpan.textContent = "---";
+                footerCounterSpan.textContent = "---";
             }
         })
         .catch(error => {
             console.error("Error updating/fetching visitor counter:", error);
             // Fallback gracefully
-            if (footerCounterSpan) footerCounterSpan.textContent = "124";
-            if (floatingCounterSpan) floatingCounterSpan.textContent = "124";
+            footerCounterSpan.textContent = "124";
         });
 }
 

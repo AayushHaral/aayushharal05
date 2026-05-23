@@ -1928,38 +1928,6 @@ section {
     animation: badge-pulse 2s infinite;
 }
 
-/* Floating Visitor Counter Widget */
-.floating-visitor-wrapper {
-    position: fixed;
-    bottom: 2rem;
-    left: 2rem;
-    z-index: 99;
-    pointer-events: auto;
-    animation: float-badge-in 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.floating-visitor-wrapper .visitor-badge {
-    background: rgba(11, 15, 25, 0.8);
-    border: 1px solid rgba(168, 85, 247, 0.2);
-    box-shadow: var(--shadow-lg), var(--glow-purple);
-}
-
-.floating-visitor-wrapper .visitor-badge:hover {
-    border-color: var(--accent-purple);
-    box-shadow: var(--shadow-lg), var(--glow-purple), 0 0 15px rgba(168, 85, 247, 0.4);
-    transform: translateY(-3px) scale(1.03);
-}
-
-@keyframes float-badge-in {
-    0% {
-        transform: translateY(50px) scale(0.8);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-}
 .footer-links h4,
 .footer-socials h4 {
     font-family: var(--font-heading);
@@ -2140,19 +2108,6 @@ section {
 
 /* Mobile Devices & Hamburger Menu Layout */
 @media (max-width: 768px) {
-<<<<<<< HEAD
-=======
-    .floating-visitor-wrapper {
-        bottom: 1rem;
-        left: 1rem;
-    }
-
-    .floating-visitor-wrapper .visitor-badge {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
-    }
-
->>>>>>> dad0dce (feat: add modern animated public visitor counter and floating widget)
     .mobile-menu-toggle {
         display: flex;
     }
