@@ -1869,6 +1869,97 @@ section {
     font-size: 0.95rem;
 }
 
+/* Visitor Counter Widget Styling */
+.visitor-counter-wrapper {
+    margin-top: 0.8rem;
+    align-self: flex-start;
+}
+
+.visitor-badge {
+    background: var(--bg-card);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-card);
+    padding: 0.5rem 1.1rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+}
+
+.visitor-badge:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-blue);
+    box-shadow: var(--shadow-md), var(--glow-blue);
+    color: var(--text-primary);
+}
+
+.visitor-icon {
+    width: 15px;
+    height: 15px;
+    color: var(--accent-blue);
+}
+
+.visitor-text {
+    font-size: 0.85rem;
+}
+
+.visitor-count-num {
+    font-weight: 700;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: var(--font-heading);
+    min-width: 10px;
+}
+
+.live-pulse {
+    width: 7px;
+    height: 7px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 6px #22c55e;
+    animation: badge-pulse 2s infinite;
+}
+
+/* Floating Visitor Counter Widget */
+.floating-visitor-wrapper {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 99;
+    pointer-events: auto;
+    animation: float-badge-in 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.floating-visitor-wrapper .visitor-badge {
+    background: rgba(11, 15, 25, 0.8);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    box-shadow: var(--shadow-lg), var(--glow-purple);
+}
+
+.floating-visitor-wrapper .visitor-badge:hover {
+    border-color: var(--accent-purple);
+    box-shadow: var(--shadow-lg), var(--glow-purple), 0 0 15px rgba(168, 85, 247, 0.4);
+    transform: translateY(-3px) scale(1.03);
+}
+
+@keyframes float-badge-in {
+    0% {
+        transform: translateY(50px) scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
 .footer-links h4,
 .footer-socials h4 {
     font-family: var(--font-heading);
@@ -2049,6 +2140,19 @@ section {
 
 /* Mobile Devices & Hamburger Menu Layout */
 @media (max-width: 768px) {
+<<<<<<< HEAD
+=======
+    .floating-visitor-wrapper {
+        bottom: 1rem;
+        left: 1rem;
+    }
+
+    .floating-visitor-wrapper .visitor-badge {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+>>>>>>> dad0dce (feat: add modern animated public visitor counter and floating widget)
     .mobile-menu-toggle {
         display: flex;
     }
