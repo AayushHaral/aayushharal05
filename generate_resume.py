@@ -92,7 +92,7 @@ def create_resume_pdf(filename):
     )
     
     # Header Section
-    story.append(Paragraph("AAYUSH HARAL", title_style))
+    story.append(Paragraph("AAYUSH ANIL HARAL", title_style))
     story.append(Paragraph("Computer Engineer & Web Developer", subtitle_style))
     
     # Contact grid (using Table for clean layout)
@@ -103,7 +103,7 @@ def create_resume_pdf(filename):
             Paragraph("<b>WhatsApp:</b> +91 95034 23644", contact_style)
         ],
         [
-            Paragraph("<b>Location:</b> Maharashtra, India", contact_style),
+            Paragraph("<b>Location:</b> Nashik, Maharashtra, India", contact_style),
             Paragraph("<b>LinkedIn:</b> linkedin.com/in/aayush-haral", contact_style),
             Paragraph("<b>GitHub:</b> github.com/aayush-haral", contact_style)
         ]
