@@ -104,7 +104,7 @@ def create_resume_pdf(filename):
         ],
         [
             Paragraph("<b>Location:</b> Nashik, Maharashtra, India", contact_style),
-            Paragraph("<b>LinkedIn:</b> linkedin.com/in/aayush-haral", contact_style),
+            Paragraph("<b>LinkedIn:</b> linkedin.com/in/aayush-haral-8b4113305", contact_style),
             Paragraph("<b>GitHub:</b> github.com/aayush-haral", contact_style)
         ]
     ]
