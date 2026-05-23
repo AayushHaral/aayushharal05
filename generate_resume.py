@@ -208,16 +208,6 @@ def create_resume_pdf(filename):
         "• Built student attendance tracking system featuring an interactive admin dashboard.<br/>"
         "• Integrated secure role-based login authentication and attendance query reporting modules.", body_style
     ))
-    story.append(Spacer(1, 4))
-    
-    # Project 2
-    story.append(Paragraph("<b>Student Management System</b>", bold_body_style))
-    story.append(Paragraph("<i>Technologies: HTML, CSS, JavaScript, PHP, MySQL</i>", body_style))
-    story.append(Paragraph(
-        "• Implemented robust CRUD operations for adding, searching, updating and deleting student records.<br/>"
-        "• Designed responsive layout optimized across devices with instant search capabilities.", body_style
-    ))
-    
     story.append(Spacer(1, 8))
     
     # Certifications & Hobbies (using Table side-by-side for compact single page design)
