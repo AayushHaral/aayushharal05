@@ -211,16 +211,16 @@ def create_resume_pdf(filename):
     story.append(Spacer(1, 2))
     
     # Certifications & Hobbies (using Table side-by-side for compact single page design)
-    cert_text = (
+    left_text = (
         "<b>Professional Memberships:</b><br/>"
-        "• Member, Association for Computing Machinery (ACM)<br/><br/>"
+        "• Member, Association for Computing Machinery (ACM)"
+    )
+    
+    right_text = (
         "<b>EduSkills Academy Certifications:</b><br/>"
         "• Full Stack PHP Development<br/>"
         "• Ethical Hacking<br/>"
-        "• Zscaler Zero Trust Cloud Security"
-    )
-    
-    hobbies_text = (
+        "• Zscaler Zero Trust Cloud Security<br/><br/>"
         "<b>Hobbies & Interests:</b><br/>"
         "• Coding & Problem Solving<br/>"
         "• Learning New Technologies<br/>"
@@ -229,7 +229,7 @@ def create_resume_pdf(filename):
     )
     
     footer_cols_data = [
-        [Paragraph(cert_text, body_style), Paragraph(hobbies_text, body_style)]
+        [Paragraph(left_text, body_style), Paragraph(right_text, body_style)]
     ]
     footer_cols_table = Table(footer_cols_data, colWidths=[270, 270])
     footer_cols_table.setStyle(TableStyle([
