@@ -1837,6 +1837,28 @@ section {
 }
 
 /* ==========================================
+   AFFILIATIONS SECTION STYLING
+   ========================================== */
+.affiliations-section {
+    padding: 7rem 0 5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.affiliations-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.affiliations-container .acm-card {
+    width: 100%;
+    max-width: 550px;
+}
+
+/* ==========================================
    HOBBIES SECTION
    ========================================== */
 .hobbies-grid {
