@@ -210,34 +210,24 @@ def create_resume_pdf(filename):
     ))
     story.append(Spacer(1, 2))
     
-    # Certifications & Hobbies (using Table side-by-side for compact single page design)
-    left_text = (
-        "<b>Professional Memberships:</b><br/>"
-        "• Member, Association for Computing Machinery (ACM)"
-    )
+    # Professional Memberships Section
+    story.append(Paragraph("PROFESSIONAL MEMBERSHIPS", section_title_style))
+    story.append(Paragraph("• Member, Association for Computing Machinery (ACM)", body_style))
+    story.append(Spacer(1, 4))
     
-    right_text = (
-        "<b>EduSkills Academy Certifications:</b><br/>"
-        "• Full Stack PHP Development<br/>"
-        "• Ethical Hacking<br/>"
-        "• Zscaler Zero Trust Cloud Security<br/><br/>"
-        "<b>Hobbies & Interests:</b><br/>"
-        "• Coding & Problem Solving<br/>"
-        "• Learning New Technologies<br/>"
-        "• Web Designing<br/>"
-        "• Listening to Music"
-    )
+    # Certifications Section
+    story.append(Paragraph("CERTIFICATIONS", section_title_style))
+    story.append(Paragraph("• Full Stack PHP Development — EduSkills Academy Virtual Internship", body_style))
+    story.append(Paragraph("• Ethical Hacking — EduSkills Academy Virtual Internship", body_style))
+    story.append(Paragraph("• Zscaler Zero Trust Cloud Security — EduSkills Academy Virtual Internship", body_style))
+    story.append(Spacer(1, 4))
     
-    footer_cols_data = [
-        [Paragraph(left_text, body_style), Paragraph(right_text, body_style)]
-    ]
-    footer_cols_table = Table(footer_cols_data, colWidths=[270, 270])
-    footer_cols_table.setStyle(TableStyle([
-        ('VALIGN', (0,0), (-1,-1), 'TOP'),
-        ('PADDING', (0,0), (-1,-1), 0),
-    ]))
-    story.append(Paragraph("MEMBERSHIPS, CERTIFICATIONS & INTERESTS", section_title_style))
-    story.append(footer_cols_table)
+    # Hobbies & Interests Section
+    story.append(Paragraph("HOBBIES & INTERESTS", section_title_style))
+    story.append(Paragraph("• Coding & Problem Solving", body_style))
+    story.append(Paragraph("• Learning New Technologies", body_style))
+    story.append(Paragraph("• Web Designing", body_style))
+    story.append(Paragraph("• Listening to Music", body_style))
     
     # Build Document
     def page_callback(canvas, doc):
