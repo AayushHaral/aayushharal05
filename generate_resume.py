@@ -15,50 +15,52 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 
 def create_resume_pdf(filename):
-    # Setup document with 0.5 inch margins
-    margin = 36 # 0.5 inches in points
+    # Setup document with exactly 0.5 inch margins (36 points) on all sides
+    margin = 36 
     doc = SimpleDocTemplate(
         filename,
         pagesize=letter,
         leftMargin=margin,
         rightMargin=margin,
-        topMargin=15,
-        bottomMargin=15
+        topMargin=margin,
+        bottomMargin=margin
     )
     
     story = []
     styles = getSampleStyleSheet()
     
-    # Custom styles
-    primary_color = colors.HexColor("#1e3a8a") # Deep Blue
-    secondary_color = colors.HexColor("#7c3aed") # Deep Purple
-    text_color = colors.HexColor("#1f2937") # Charcoal Text
+    # Professional color palette (Clean black-and-white layout with professional blue accent)
+    primary_color = colors.HexColor("#1e3a8a")   # Professional Deep Blue Accent
+    text_color = colors.HexColor("#000000")      # Solid Black for body text
+    muted_text_color = colors.HexColor("#374151") # Charcoal for metadata/subtitles
     
-    # Custom Stylesheet definitions
+    # Typography Styles using standard built-in Times family
     title_style = ParagraphStyle(
         'NameStyle',
         parent=styles['Heading1'],
-        fontName='Helvetica-Bold',
-        fontSize=26,
-        leading=30,
+        fontName='Times-Bold',
+        fontSize=24,
+        leading=28,
         textColor=primary_color,
-        spaceAfter=4
+        alignment=1, # Centered
+        spaceAfter=2
     )
     
     subtitle_style = ParagraphStyle(
         'SubtitleStyle',
         parent=styles['Normal'],
-        fontName='Helvetica-Bold',
-        fontSize=12,
-        leading=14,
-        textColor=secondary_color,
-        spaceAfter=10
+        fontName='Times-Bold',
+        fontSize=11,
+        leading=13,
+        textColor=muted_text_color,
+        alignment=1, # Centered
+        spaceAfter=12 # 12px spacing below the name area
     )
     
     contact_style = ParagraphStyle(
         'ContactStyle',
         parent=styles['Normal'],
-        fontName='Helvetica',
+        fontName='Times-Roman',
         fontSize=9,
         leading=12,
         textColor=text_color,
@@ -68,34 +70,49 @@ def create_resume_pdf(filename):
     section_title_style = ParagraphStyle(
         'SectionTitleStyle',
         parent=styles['Heading2'],
-        fontName='Helvetica-Bold',
-        fontSize=11.5,
-        leading=14.5,
+        fontName='Times-Bold',
+        fontSize=11,
+        leading=14,
         textColor=primary_color,
-        spaceBefore=5,
-        spaceAfter=1
+        spaceBefore=0,
+        spaceAfter=2
     )
     
     body_style = ParagraphStyle(
         'BodyStyle',
         parent=styles['Normal'],
-        fontName='Helvetica',
-        fontSize=8.8,
-        leading=11.5,
+        fontName='Times-Roman',
+        fontSize=9.0,
+        leading=12,
         textColor=text_color
     )
     
     bold_body_style = ParagraphStyle(
         'BoldBodyStyle',
         parent=body_style,
-        fontName='Helvetica-Bold'
+        fontName='Times-Bold'
     )
     
-    # Header Section
+    italic_body_style = ParagraphStyle(
+        'ItalicBodyStyle',
+        parent=body_style,
+        fontName='Times-Italic'
+    )
+    
+    # Custom bullet point style with hanging indent for clean list alignment
+    bullet_style = ParagraphStyle(
+        'BulletStyle',
+        parent=body_style,
+        leftIndent=15,
+        firstLineIndent=-10,
+        spaceAfter=1.5
+    )
+    
+    # 1. Header Section
     story.append(Paragraph("AAYUSH HARAL", title_style))
     story.append(Paragraph("Computer Engineer & Web Developer", subtitle_style))
     
-    # Contact grid (using Table for clean layout)
+    # 2. Contact Information Grid (Centered)
     contact_data = [
         [
             Paragraph("<b>Email:</b> aayushharal05@gmail.com", contact_style),
@@ -118,19 +135,20 @@ def create_resume_pdf(filename):
     ]))
     story.append(contact_table)
     
-    # Draw horizontal divider
+    # Divider below Header (Blue Accent line)
     divider_data = [['']]
     divider_table = Table(divider_data, colWidths=[540])
     divider_table.setStyle(TableStyle([
         ('LINEBELOW', (0,0), (-1,-1), 1.5, primary_color),
         ('BOTTOMPADDING', (0,0), (-1,-1), 2),
-        ('TOPPADDING', (0,0), (-1,-1), 1),
+        ('TOPPADDING', (0,0), (-1,-1), 2),
     ]))
     story.append(divider_table)
     
-    story.append(Spacer(1, 2))
+    # 18-20px spacing between contact information and first section
+    story.append(Spacer(1, 18))
     
-    # Career Objective
+    # 3. Career Objective Section
     story.append(Paragraph("CAREER OBJECTIVE", section_title_style))
     story.append(Paragraph(
         "To obtain a challenging position in the software and web development field where I can apply my "
@@ -138,9 +156,10 @@ def create_resume_pdf(filename):
         "while continuously learning new technologies.", body_style
     ))
     
-    story.append(Spacer(1, 2))
+    # 15-20px spacing between all major sections
+    story.append(Spacer(1, 15))
     
-    # Education
+    # 4. Education Section
     story.append(Paragraph("EDUCATION", section_title_style))
     edu_data = [
         [
@@ -170,16 +189,16 @@ def create_resume_pdf(filename):
     ]
     edu_table = Table(edu_data, colWidths=[200, 180, 80, 80])
     edu_table.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#f3f4f6")),
+        ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#f9fafb")),
         ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#d1d5db")),
-        ('PADDING', (0,0), (-1,-1), 3),
+        ('PADDING', (0,0), (-1,-1), 4.5), # Increased row heights with proper padding
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
     ]))
     story.append(edu_table)
     
-    story.append(Spacer(1, 2))
+    story.append(Spacer(1, 15))
     
-    # Technical Skills
+    # 5. Technical Skills Section
     story.append(Paragraph("TECHNICAL SKILLS", section_title_style))
     skills_data = [
         [Paragraph("<b>Frontend Technologies:</b>", bold_body_style), Paragraph("HTML, CSS, JavaScript, React.js", body_style)],
@@ -187,49 +206,49 @@ def create_resume_pdf(filename):
         [Paragraph("<b>Databases:</b>", bold_body_style), Paragraph("MySQL", body_style)],
         [Paragraph("<b>Tools & Systems:</b>", bold_body_style), Paragraph("Git, GitHub, VS Code", body_style)]
     ]
-    skills_table = Table(skills_data, colWidths=[150, 390])
+    skills_table = Table(skills_data, colWidths=[140, 400])
     skills_table.setStyle(TableStyle([
         ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#e5e7eb")),
-        ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#f9fafb")),
-        ('PADDING', (0,0), (-1,-1), 3),
+        ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#fcfcfc")),
+        ('PADDING', (0,0), (-1,-1), 4), # Proper row padding
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
     ]))
     story.append(skills_table)
     
-    story.append(Spacer(1, 2))
+    story.append(Spacer(1, 15))
     
-    # Projects
+    # 6. Key Projects Section
     story.append(Paragraph("KEY PROJECTS", section_title_style))
-    
-    # Project 1
     story.append(Paragraph("<b>Smart Attendance Management System</b>", bold_body_style))
-    story.append(Paragraph("<i>Technologies: HTML, CSS, JavaScript, PHP, MySQL</i>", body_style))
-    story.append(Paragraph(
-        "• Built student attendance tracking system featuring an interactive admin dashboard.<br/>"
-        "• Integrated secure role-based login authentication and attendance query reporting modules.", body_style
-    ))
-    story.append(Spacer(1, 2))
+    story.append(Paragraph("<i>Technologies: HTML, CSS, JavaScript, PHP, MySQL</i>", italic_body_style))
+    story.append(Spacer(1, 3))
+    story.append(Paragraph("• Built student attendance tracking system featuring an interactive admin dashboard.", bullet_style))
+    story.append(Paragraph("• Integrated secure role-based login authentication and attendance query reporting modules.", bullet_style))
     
-    # Professional Memberships Section
+    story.append(Spacer(1, 15))
+    
+    # 7. Professional Memberships Section
     story.append(Paragraph("PROFESSIONAL MEMBERSHIPS", section_title_style))
-    story.append(Paragraph("• Member, Association for Computing Machinery (ACM)", body_style))
-    story.append(Spacer(1, 4))
+    story.append(Paragraph("• Member, Association for Computing Machinery (ACM)", bullet_style))
     
-    # Certifications Section
+    story.append(Spacer(1, 15))
+    
+    # 8. Certifications Section
     story.append(Paragraph("CERTIFICATIONS", section_title_style))
-    story.append(Paragraph("• Full Stack PHP Development — EduSkills Academy Virtual Internship", body_style))
-    story.append(Paragraph("• Ethical Hacking — EduSkills Academy Virtual Internship", body_style))
-    story.append(Paragraph("• Zscaler Zero Trust Cloud Security — EduSkills Academy Virtual Internship", body_style))
-    story.append(Spacer(1, 4))
+    story.append(Paragraph("• Full Stack PHP Development — EduSkills Academy Virtual Internship", bullet_style))
+    story.append(Paragraph("• Ethical Hacking — EduSkills Academy Virtual Internship", bullet_style))
+    story.append(Paragraph("• Zscaler Zero Trust Cloud Security — EduSkills Academy Virtual Internship", bullet_style))
     
-    # Hobbies & Interests Section
+    story.append(Spacer(1, 15))
+    
+    # 9. Hobbies & Interests Section
     story.append(Paragraph("HOBBIES & INTERESTS", section_title_style))
-    story.append(Paragraph("• Coding & Problem Solving", body_style))
-    story.append(Paragraph("• Learning New Technologies", body_style))
-    story.append(Paragraph("• Web Designing", body_style))
-    story.append(Paragraph("• Listening to Music", body_style))
+    story.append(Paragraph("• Coding & Problem Solving", bullet_style))
+    story.append(Paragraph("• Learning New Technologies", bullet_style))
+    story.append(Paragraph("• Web Designing", bullet_style))
+    story.append(Paragraph("• Listening to Music", bullet_style))
     
-    # Build Document
+    # Build Document with debug page template callback
     def page_callback(canvas, doc):
         print(f"DEBUG Page Callback: Drawing page {doc.page}...")
         
