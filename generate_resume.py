@@ -22,8 +22,8 @@ def create_resume_pdf(filename):
         pagesize=letter,
         leftMargin=margin,
         rightMargin=margin,
-        topMargin=margin,
-        bottomMargin=margin
+        topMargin=15,
+        bottomMargin=15
     )
     
     story = []
@@ -69,19 +69,19 @@ def create_resume_pdf(filename):
         'SectionTitleStyle',
         parent=styles['Heading2'],
         fontName='Helvetica-Bold',
-        fontSize=13,
-        leading=16,
+        fontSize=11.5,
+        leading=14.5,
         textColor=primary_color,
-        spaceBefore=10,
-        spaceAfter=4
+        spaceBefore=5,
+        spaceAfter=1
     )
     
     body_style = ParagraphStyle(
         'BodyStyle',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=9.5,
-        leading=13.5,
+        fontSize=8.8,
+        leading=11.5,
         textColor=text_color
     )
     
@@ -123,12 +123,12 @@ def create_resume_pdf(filename):
     divider_table = Table(divider_data, colWidths=[540])
     divider_table.setStyle(TableStyle([
         ('LINEBELOW', (0,0), (-1,-1), 1.5, primary_color),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 6),
-        ('TOPPADDING', (0,0), (-1,-1), 2),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 2),
+        ('TOPPADDING', (0,0), (-1,-1), 1),
     ]))
     story.append(divider_table)
     
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 2))
     
     # Career Objective
     story.append(Paragraph("CAREER OBJECTIVE", section_title_style))
@@ -138,7 +138,7 @@ def create_resume_pdf(filename):
         "while continuously learning new technologies.", body_style
     ))
     
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 2))
     
     # Education
     story.append(Paragraph("EDUCATION", section_title_style))
@@ -172,12 +172,12 @@ def create_resume_pdf(filename):
     edu_table.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#f3f4f6")),
         ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#d1d5db")),
-        ('PADDING', (0,0), (-1,-1), 6),
+        ('PADDING', (0,0), (-1,-1), 3),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
     ]))
     story.append(edu_table)
     
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 2))
     
     # Technical Skills
     story.append(Paragraph("TECHNICAL SKILLS", section_title_style))
@@ -191,12 +191,12 @@ def create_resume_pdf(filename):
     skills_table.setStyle(TableStyle([
         ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#e5e7eb")),
         ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#f9fafb")),
-        ('PADDING', (0,0), (-1,-1), 5),
+        ('PADDING', (0,0), (-1,-1), 3),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
     ]))
     story.append(skills_table)
     
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 2))
     
     # Projects
     story.append(Paragraph("KEY PROJECTS", section_title_style))
@@ -208,10 +208,12 @@ def create_resume_pdf(filename):
         "• Built student attendance tracking system featuring an interactive admin dashboard.<br/>"
         "• Integrated secure role-based login authentication and attendance query reporting modules.", body_style
     ))
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 2))
     
     # Certifications & Hobbies (using Table side-by-side for compact single page design)
     cert_text = (
+        "<b>Professional Memberships:</b><br/>"
+        "• Member, Association for Computing Machinery (ACM)<br/><br/>"
         "<b>EduSkills Academy Certifications:</b><br/>"
         "• Full Stack PHP Development<br/>"
         "• Ethical Hacking<br/>"
@@ -234,11 +236,14 @@ def create_resume_pdf(filename):
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
         ('PADDING', (0,0), (-1,-1), 0),
     ]))
-    story.append(Paragraph("CERTIFICATIONS & INTERESTS", section_title_style))
+    story.append(Paragraph("MEMBERSHIPS, CERTIFICATIONS & INTERESTS", section_title_style))
     story.append(footer_cols_table)
     
     # Build Document
-    doc.build(story)
+    def page_callback(canvas, doc):
+        print(f"DEBUG Page Callback: Drawing page {doc.page}...")
+        
+    doc.build(story, onFirstPage=page_callback, onLaterPages=page_callback)
     print(f"Success: Professional resume PDF generated at '{filename}'.")
 
 if __name__ == "__main__":
