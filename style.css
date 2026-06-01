@@ -131,19 +131,37 @@ a {
 }
 
 .loader-logo {
-    font-family: var(--font-heading);
-    font-size: 3rem;
-    font-weight: 800;
-    color: var(--text-primary);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.2rem;
+    gap: 0.8rem;
 }
 
-.loader-logo .logo-bracket {
+.loader-logo-svg {
+    width: 80px;
+    height: 80px;
+    animation: loader-logo-pulse 2s infinite alternate ease-in-out;
+}
+
+.loader-logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 800;
     background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+}
+
+@keyframes loader-logo-pulse {
+    0% {
+        transform: scale(0.95);
+        filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.25));
+    }
+    100% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
+    }
 }
 
 .loader-bar {
@@ -328,17 +346,28 @@ body.cursor-hover .custom-cursor-follower {
     display: flex;
     align-items: center;
     color: var(--text-primary);
+    gap: 0.5rem;
+}
+
+.logo-svg {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    vertical-align: middle;
+    transition: transform var(--transition-normal);
+}
+
+.logo:hover .logo-svg {
+    transform: rotate(10deg) scale(1.08);
 }
 
 .logo-text {
-    background: var(--accent-gradient);
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--text-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}
-
-.logo-bracket {
-    color: var(--accent-blue);
-    font-weight: 600;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    vertical-align: middle;
 }
 
 .nav-list {
