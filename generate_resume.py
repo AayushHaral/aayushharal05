@@ -202,8 +202,8 @@ def create_resume_pdf(filename):
     story.append(Paragraph("TECHNICAL SKILLS", section_title_style))
     skills_data = [
         [Paragraph("<b>Frontend Technologies:</b>", bold_body_style), Paragraph("HTML, CSS, JavaScript, React.js", body_style)],
-        [Paragraph("<b>Backend & Logic:</b>", bold_body_style), Paragraph("PHP, Python", body_style)],
-        [Paragraph("<b>Databases:</b>", bold_body_style), Paragraph("MySQL", body_style)],
+        [Paragraph("<b>Backend & Logic:</b>", bold_body_style), Paragraph("PHP, Python, Java", body_style)],
+        [Paragraph("<b>Databases:</b>", bold_body_style), Paragraph("MySQL, MongoDB", body_style)],
         [Paragraph("<b>Tools & Systems:</b>", bold_body_style), Paragraph("Git, GitHub, VS Code", body_style)]
     ]
     skills_table = Table(skills_data, colWidths=[140, 400])
