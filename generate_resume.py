@@ -170,7 +170,7 @@ def create_resume_pdf(filename):
         ],
         [
             Paragraph("B.E. Computer Engineering", body_style),
-            Paragraph("Savitribai Phule Pune University", body_style),
+            Paragraph("Guru Gobind Singh College of Engineering & Research Centre, Nashik (SPPU)", body_style),
             Paragraph("2023 - Present", body_style),
             Paragraph("Pursuing", body_style)
         ],
