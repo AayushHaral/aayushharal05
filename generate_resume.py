@@ -232,7 +232,7 @@ def create_resume_pdf(filename):
     
     # Project 2: SmartCartAI
     story.append(Paragraph("<b>SmartCartAI</b>", bold_body_style))
-    story.append(Paragraph("<i>Technologies: React.js, Python, JavaScript, HTML, CSS, MySQL, MongoDB</i>", italic_body_style))
+    story.append(Paragraph("<i>Technologies: React.js, Python, JavaScript, MySQL, MongoDB | GitHub: github.com/aayush-haral/SmartCartAI</i>", italic_body_style))
     story.append(Spacer(1, 2))
     story.append(Paragraph("• Developed AI-assisted smart shopping cart application featuring real-time item detection and billing automation.", bullet_style))
     story.append(Paragraph("• Integrated full-stack API workflows and database synchronization for inventory management and instant digital receipts.", bullet_style))
