@@ -241,7 +241,7 @@ function initProjectFilters() {
 function initScrollEngine() {
     // 6.1 Intersection Observer for Section Reveal
     const revealElements = document.querySelectorAll(
-        ".section-header, .about-grid, .skill-category-card, .project-card, .timeline-card, .cert-card, .acm-card, .contact-grid"
+        ".section-header, .about-grid, .skill-category-card, .project-card, .timeline-card, .cert-card, .cert-subsection, .workshop-card, .acm-card, .contact-grid"
     );
 
     if ("IntersectionObserver" in window) {
